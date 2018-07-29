@@ -17,7 +17,7 @@
 $(call inherit-product, device/xiaomi/santoni/full_santoni.mk)
 
 # Include Bootanimation configuration
-TARGET_ARCH := arm64
+TARGET_GAPPS_ARCH := arm64
 GAPPS_VARIANT := micro
 TARGET_BOOT_ANIMATION_RES := 720
 TARGET_INCLUDE_ARCORE := true

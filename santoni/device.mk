@@ -135,9 +135,8 @@ PRODUCT_COPY_FILES += \
 
 # Bluetooth
 PRODUCT_PACKAGES += \
-    libbt-vendor \
-    android.hardware.bluetooth@1.0-impl \
-    android.hardware.bluetooth@1.0-service
+    android.hardware.bluetooth@1.0 \
+    libbt-vendor
 
 # Camera
 PRODUCT_PACKAGES += \
@@ -173,17 +172,22 @@ PRODUCT_PACKAGES += \
     hwcomposer.msm8937 \
     memtrack.msm8937 \
     libdisplayconfig \
-    liboverlay
+    liboverlay \
+    libtinyxml
 
 PRODUCT_PACKAGES += \
     android.hardware.graphics.allocator@2.0-impl \
     android.hardware.graphics.allocator@2.0-service \
     android.hardware.graphics.composer@2.1-impl \
+    android.hardware.graphics.composer@2.1-service \
     android.hardware.graphics.mapper@2.0-impl \
     android.hardware.memtrack@1.0-impl \
-    android.hardware.memtrack@1.0-service \
+    android.hardware.memtrack@1.0-service
+
+PRODUCT_PACKAGES += \
     vendor.display.config@1.0 \
-    vendor.display.config@1.0_vendor
+    vendor.display.config@1.0_vendor \
+    vendor.display.config@1.1_vendor
 
 # DRM
 PRODUCT_PACKAGES += \
@@ -205,9 +209,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     FMRadio \
     libfmjni
-
-PRODUCT_PACKAGES += \
-    android.hardware.broadcastradio@1.0-impl
 
 # Gatekeeper HAL
 PRODUCT_PACKAGES += \
@@ -284,6 +285,11 @@ PRODUCT_PACKAGES += \
     android.hardware.light@2.0-impl \
     android.hardware.light@2.0-service
 
+# LiveDisplay native
+PRODUCT_PACKAGES += \
+    vendor.lineage.livedisplay@1.0-service-sdm \
+    vendor.lineage.livedisplay@1.0_vendor
+
 # Media
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/media_codecs.xml:system/vendor/etc/media_codecs.xml \
@@ -345,8 +351,8 @@ PRODUCT_PACKAGES += \
     ueventd.qcom.rc
 
 PRODUCT_PACKAGES += \
-    init.qcom.post_boot.sh \
-    set_baseband.sh
+    init.baseband.sh \
+    init.qcom.post_boot.sh
 
 # RenderScript HAL
 PRODUCT_PACKAGES += \
