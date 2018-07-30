@@ -764,7 +764,7 @@ private:
 #endif
     QCameraMemory *mMetadataMem;
 
-    uint32_t sNextJobId;
+    static uint32_t sNextJobId;
 
     //Gralloc memory details
     pthread_mutex_t mGrallocLock;
@@ -777,7 +777,7 @@ private:
     uint32_t mSurfaceStridePadding;
 
     //QCamera Display Object
-    //QCameraDisplay mCameraDisplay;
+    QCameraDisplay mCameraDisplay;
 
     bool m_bNeedRestart;
     Mutex mMapLock;

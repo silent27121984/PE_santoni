@@ -38,7 +38,6 @@
 #include <linux/media.h>
 #include <media/msm_cam_sensor.h>
 #include <dlfcn.h>
-#include <unistd.h>
 
 #define IOCTL_H <SYSTEM_HEADER_PREFIX/ioctl.h>
 #include IOCTL_H
@@ -56,10 +55,6 @@ static mm_camera_ctrl_t g_cam_ctrl;
 
 static pthread_mutex_t g_handler_lock = PTHREAD_MUTEX_INITIALIZER;
 static uint16_t g_handler_history_count = 0; /* history count for handler */
-
-#ifndef DAEMON_PRESENT
-static bool g_shim_initialized = FALSE; /* Tells mct shim layer initialized or not */
-#endif
 
 // 16th (starting from 0) bit tells its a BACK or FRONT camera
 #define CAM_SENSOR_FACING_MASK (1U<<16)
@@ -1805,15 +1800,9 @@ uint8_t get_num_of_cameras()
 
     memset (&g_cam_ctrl, 0, sizeof (g_cam_ctrl));
 #ifndef DAEMON_PRESENT
-    if (g_shim_initialized == FALSE) {
-        if (mm_camera_load_shim_lib() < 0) {
-            LOGE("Failed to module shim library");
-            return 0;
-        } else {
-            g_shim_initialized = TRUE;
-        }
-    } else {
-        LOGH("module shim layer already intialized");
+    if (mm_camera_load_shim_lib() < 0) {
+        LOGE ("Failed to module shim library");
+        return 0;
     }
 #endif /* DAEMON_PRESENT */
 
